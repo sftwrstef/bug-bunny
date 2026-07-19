@@ -1,48 +1,60 @@
 <div align="center">
 
-\`\`\`text
-██████╗ ██╗   ██╗ ██████╗     ██████╗ ██╗   ██╗███╗   ██╗███╗   ██╗██╗   ██╗
-██╔══██╗██║   ██║██╔════╝     ██╔══██╗██║   ██║████╗  ██║████╗  ██║╚██╗ ██╔╝
-██████╔╝██║   ██║██║  ███╗    ██████╔╝██║   ██║██╔██╗ ██║██╔██╗ ██║ ╚████╔╝
-██╔══██╗██║   ██║██║   ██║    ██╔══██╗██║   ██║██║╚██╗██║██║╚██╗██║  ╚██╔╝
-██████╔╝╚██████╔╝╚██████╔╝    ██████╔╝╚██████╔╝██║ ╚████║██║ ╚████║   ██║
-╚═════╝  ╚═════╝  ╚═════╝     ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═══╝   ╚═╝
-\`\`\`
+# 🐰 Bug Bunny
 
-**Local security proofs for people who want evidence, not vibes.**
+### Verified security proofs, not scanner theatre.
 
-\`REACT + VITE\` · \`FASTAPI\` · \`SQLITE\` · \`LOCALHOST ONLY\` · \`DEV WEEK 2026\`
+`LOCAL-FIRST` &nbsp; `VICTIM-CENTERED` &nbsp; `EVIDENCE-BACKED` &nbsp; `OPENAI BUILD WEEK 2026`
+
+<sub>Built with Codex · React / FastAPI / SQLite · localhost-only demonstration</sub>
 
 </div>
+
+---
+
 > [!IMPORTANT]
-> Bug Bunny turns a security claim into a reproducible, victim-centered proof
-> before it becomes a report. It runs a real local replay, records the strongest
-> truthful control beside the exploit, and leaves behind inspectable evidence.
+> **One claim. One valid control. One replayable proof.**
+>
+> Bug Bunny takes a security finding past a dashboard card: it replays the behavior
+> against a live ephemeral local fixture, compares it with the strongest truthful
+> control, and saves redacted, hashed evidence for review.
 
-![Verified IDOR Replay matrix](evidence/dev-week/dev-week-verified-idor.png)
+![Bug Bunny verified IDOR replay](evidence/dev-week/dev-week-verified-idor.png)
 
-## // mission
+## The proof, at a glance
 
-Most security dashboards stop at “a scanner found something.” Bug Bunny asks the
-harder question: **can the harm be replayed, compared against a valid control, and
-proven from the same state?**
+| | Check | Result |
+| :---: | --- | --- |
+| `01` | **Negative control** | No token → `401 Unauthorized` |
+| `02` | **Truthful control** | Attacker can read *their own* profile |
+| `03` | **Exploit replay** | Attacker reads the victim’s private data |
+| `04` | **Evidence** | Tokens redacted; state and responses hashed |
 
-\`\`\`text
-local fixture + deterministic identities
-            │
-            ├── unauthenticated request ──► 401 rejected
-            ├── truthful control ─────────► attacker reads own profile
-            └── disputed request ─────────► attacker reads victim data
-                                                    │
-                                                    └──► redacted + hashed evidence
-\`\`\`
+> [!NOTE]
+> This is not a status-code demo. The replay asserts exposure of victim-private data
+> from the same seeded state and identity used for the valid control.
 
-The verified IDOR replay is intentionally bounded: it starts an ephemeral API on
-\`127.0.0.1\`, never probes an external target, and requires no API key.
+## How it works
 
-## // quickstart
+```text
+seed attacker + victim
+          │
+          ▼
+start vulnerable API on localhost
+          │
+          ├── valid request ─────► attacker profile
+          │
+          └── disputed request ──► victim private data
+                                          │
+                                          ▼
+                                  write redacted proof artifact
+```
 
-\`\`\`bash
+The fixture uses a random `127.0.0.1` port and never contacts a third-party target.
+
+## Run it
+
+```bash
 git clone https://github.com/sftwrstef/bug-bunny.git
 cd bug-bunny
 
@@ -51,75 +63,42 @@ python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 
 npm run dev
-\`\`\`
+```
 
-Open the local URL printed by Vite, then choose **Run verified IDOR replay**.
-The backend runs at \`http://127.0.0.1:8000\`.
+Open the Vite URL, then choose **Run verified IDOR replay**.
 
-\`\`\`bash
-# Run the proof without the UI
+```bash
+# Or execute the proof without the UI
 .venv/bin/python -m unittest tests.test_idor_proof -v
-\`\`\`
+```
 
-The replay writes its artifact to
-[\`evidence/dev-week/verified-idor-proof.json\`](evidence/dev-week/verified-idor-proof.json).
+Evidence is written to [`evidence/dev-week/verified-idor-proof.json`](evidence/dev-week/verified-idor-proof.json).
 
-## // proof contract
+## Inside the repo
 
-| Stage | Assertion | Why it matters |
-| --- | --- | --- |
-| \`NEGATIVE CONTROL\` | No token → \`401\` | The fixture does enforce authentication. |
-| \`TRUTHFUL CONTROL\` | Attacker reads their own profile | The attacker identity and endpoint are valid. |
-| \`EXPLOIT\` | Attacker reads victim private data | The authorization boundary is broken. |
-| \`EVIDENCE\` | Tokens redacted; state and responses hashed | The replay leaves a reviewable record. |
-
-\`\`\`text
-Not merely a status-code mismatch.
-The replay asserts exposure of the victim's private data from the same seeded state.
-\`\`\`
-
-## // repository map
-
-\`\`\`text
-src/                    React dashboard + proof matrix
+```text
+src/                    React dashboard + control/exploit matrix
 backend/                FastAPI application + SQLite persistence
-proofs/idor_proof.py    Ephemeral vulnerable fixture + replay engine
+proofs/idor_proof.py    Local fixture + replay engine
 tests/                  Focused end-to-end proof test
 evidence/dev-week/      Generated artifact + demo screenshot
-\`\`\`
+```
 
-## // API surface
+## Dev Week provenance
 
-| Endpoint | Purpose |
+| Pre-existing baseline | Dev Week extension |
 | --- | --- |
-| \`GET /api/health\` | Health check |
-| \`POST /api/proofs/idor/run\` | Execute the verified local IDOR replay |
-| \`POST /api/audits/create\` | Create an audit run |
-| \`POST /api/audits/{run_id}/run-mock-scan\` | Run the original mock scan flow |
-| \`GET /api/audits/{run_id}/findings\` | Read findings for an audit run |
-| \`POST /api/audits/{run_id}/generate-report\` | Generate an audit report |
-
-## // Dev Week provenance
-
-| Scope | Status |
-| --- | --- |
-| Dashboard, API, SQLite storage, mock audit pipeline | \`PRE-EXISTING BASELINE\` |
-| Verified IDOR replay, control/exploit matrix, evidence artifact, test, UI integration | \`DEV WEEK EXTENSION\` |
+| Dashboard, FastAPI API, SQLite storage, mock audit pipeline | Verified IDOR replay, UI matrix, evidence artifact, focused test |
 
 Built collaboratively with **Codex** using **GPT-5.6 Sol**.
-Primary Codex session: \`019f7376-015c-78b3-a2ea-7b43e4b03b40\`.
+Primary session: `019f7376-015c-78b3-a2ea-7b43e4b03b40`.
 
-For the full separation of work, see [\`PREEXISTING.md\`](PREEXISTING.md) and
-[\`DEV_WEEK_WORK.md\`](DEV_WEEK_WORK.md).
+Read the boundary in [`PREEXISTING.md`](PREEXISTING.md) and [`DEV_WEEK_WORK.md`](DEV_WEEK_WORK.md).
 
-## // submission checklist
-
-- [ ] Run \`/feedback\` in the Codex session and retain the resulting session ID.
-- [ ] Keep the Dev Week commits, proof JSON, screenshot, and setup steps.
-- [ ] Demo the proof from a clean local run in under three minutes.
+---
 
 <div align="center">
 
-\`proof first · noise later\`
+`make the harm legible.`
 
 </div>

@@ -338,7 +338,7 @@ function Sidebar({ activeNav, setActiveNav, setTab, notify }) {
     <aside className="sidebar">
       <div className="brand">
         <BrandMark />
-        <span>Bug Bunny<span>.ai</span></span>
+        <span>Bug<span> Bunny</span></span>
       </div>
       <nav className="nav">
         {navItems.map(({ label, icon: Icon }) => (
@@ -348,7 +348,7 @@ function Sidebar({ activeNav, setActiveNav, setTab, notify }) {
             onClick={() => {
               setActiveNav(label);
               if (label === 'Findings') setTab('Triage');
-              if (label === 'PoCs') setTab('Exploit Map');
+              if (label === 'PoCs') setTab('Surface Map');
               if (label === 'Reports') setTab('Report Draft');
               notify(`${label} view selected`);
             }}
@@ -401,7 +401,7 @@ function Topbar({ search, setSearch, onNewHunt, notify }) {
         <ChevronDown size={17} />
       </button>
       <IconButton label="Notifications" onClick={() => notify('No unread agent alerts')}><Bell size={20} /></IconButton>
-      <IconButton label="Help" onClick={() => notify('Enter an authorized target, run swarm, then open Report Draft')}><CircleHelp size={21} /></IconButton>
+      <IconButton label="Help" onClick={() => notify('Authorize a target, run the safe Web audit, then open Report Draft')}><CircleHelp size={21} /></IconButton>
       <button className="profile" onClick={() => notify('Operator profile active')}>OS <ChevronDown size={17} /></button>
     </header>
   );
@@ -422,8 +422,9 @@ function Composer({
     <section className="composer">
       <div className="target-area">
         <div>
-          <h2>Authorized target</h2>
-          <p>Enter a domain, URL, or local app you are allowed to test.</p>
+          <p className="eyebrow"><span />Scope gate</p>
+          <h2>Authorize a target</h2>
+          <p>Every run starts with a recorded boundary and your explicit approval.</p>
         </div>
         <div className="target-fields">
           <input
@@ -473,10 +474,10 @@ function AgentSwarm({ onRun, audit, running }) {
   return (
     <section className="panel agent-swarm">
       <div className="panel-title swarm-title">
-        <h3><Sparkles size={18} /> Agent Swarm</h3>
+        <h3><Sparkles size={18} /> Audit Pipeline</h3>
         <button onClick={() => onRun('full')} disabled={running}>
           <Route size={17} />
-          {running ? 'Running' : 'Run swarm'}
+          {running ? 'Running' : 'Run pipeline'}
         </button>
       </div>
       <div className="agent-grid">
@@ -661,7 +662,7 @@ function EvidencePanel({ finding, audit, onReport, onCopy, notify }) {
       </section>
       <section className="panel evidence-card">
         <div className="evidence-head">
-          <h4><DatabaseZap size={18} /> Impact snapshot</h4>
+          <h4><DatabaseZap size={18} /> Signal snapshot</h4>
           <button className="copy-button" onClick={() => onCopy(JSON.stringify(audit?.evidence || {}, null, 2))} aria-label="Copy impact snapshot">
             <Link size={16} />
           </button>
@@ -676,7 +677,7 @@ function EvidencePanel({ finding, audit, onReport, onCopy, notify }) {
         }, null, 2)}</pre>
       </section>
       <section className="panel refs-card">
-        <h4><Link size={17} /> Source refs</h4>
+        <h4><Link size={17} /> Evidence refs</h4>
         <ul>
           {(selected?.evidence?.length ? selected.evidence : audit?.evidence?.scope || ['No evidence yet']).slice(0, 4).map((item, index) => (
             <li key={`${item}-${index}`}>{item}</li>
@@ -691,7 +692,7 @@ function EvidencePanel({ finding, audit, onReport, onCopy, notify }) {
         }}>{selected?.duplicateSearch?.[0] || 'Duplicate leads pending'}</button>
       </section>
       <section className="ready-panel">
-        <h3><Check size={20} /> Ready to submit</h3>
+        <h3><Check size={20} /> Run integrity</h3>
         {checklist.map((item) => (
           <p key={item}><Check size={16} /> {item}</p>
         ))}
@@ -822,7 +823,7 @@ function ExploitMap({ audit, findings, onCopy }) {
   return (
     <section className="panel map-panel">
       <div className="panel-title">
-        <h3><TerminalSquare size={18} /> Exploit Map</h3>
+        <h3><TerminalSquare size={18} /> Surface Map</h3>
         <button className="mini-action" onClick={() => onCopy(JSON.stringify(routes, null, 2))}>Copy routes</button>
       </div>
       <div className="map-grid">
@@ -884,7 +885,7 @@ function App() {
   const [error, setError] = useState('');
   const [idorProof, setIdorProof] = useState(null);
   const [proofRunning, setProofRunning] = useState(false);
-  const tabs = ['Triage', 'Exploit Map', 'Report Draft'];
+  const tabs = ['Triage', 'Surface Map', 'Report Draft'];
   const running = audit?.status === 'scanning';
   const rawFindings = audit?.findings || [];
   const liveFindings = rawFindings.filter((finding) => {
@@ -947,7 +948,7 @@ function App() {
       const reported = await api(`/api/audits/${created.audit.run_id}/generate-report`, { method: 'POST' });
       setAudit(normalizeAuditResponse(reported));
       await refreshRuns();
-      notify(`${mode === 'report' ? 'Report' : mode === 'duplicate' ? 'Duplicate check' : 'Full audit'} complete`);
+      notify(`${mode === 'report' ? 'Report draft' : mode === 'duplicate' ? 'Duplicate leads' : 'Safe Web audit'} ready`);
     } catch (runError) {
       setError(runError.message);
       notify(runError.message);
@@ -1013,7 +1014,9 @@ function App() {
           <section className="console">
             <div className="title-row">
               <div>
-                <h1>Hunt Console</h1>
+                <p className="eyebrow"><span />Authorized research workspace</p>
+                <h1>Signal Console</h1>
+                <p className="title-subtitle">Bounded Web reconnaissance, evidence-first triage, and proof-ready reports.</p>
                 <div className="tabs">
                   {tabs.map((name) => (
                     <button className={tab === name ? 'active' : ''} onClick={() => setTab(name)} key={name}>
@@ -1059,7 +1062,7 @@ function App() {
                 </div>
               </>
             )}
-            {tab === 'Exploit Map' && !['Hunts', 'Scope', 'Settings'].includes(activeNav) && <ExploitMap audit={audit} findings={liveFindings} onCopy={copyText} />}
+            {tab === 'Surface Map' && !['Hunts', 'Scope', 'Settings'].includes(activeNav) && <ExploitMap audit={audit} findings={liveFindings} onCopy={copyText} />}
             {tab === 'Report Draft' && !['Hunts', 'Scope', 'Settings'].includes(activeNav) && <ReportDraft audit={audit} onCopy={copyText} onReport={openReport} />}
           </section>
           <EvidencePanel finding={liveFindings[selectedFinding]} audit={audit} onReport={openReport} onCopy={copyText} notify={notify} />

@@ -28,6 +28,9 @@ Administrative baseline work is not claimed as new product functionality.
   credentialed CORS is not incorrectly treated as a browser-readable exploit.
 - Added a deterministic localhost Web fixture test and verified the complete flow in
   Chromium with zero console errors.
+- Reframed the product as a dark, evidence-first Signal Console with a responsive
+  investigator workflow, making the authorization gate, live signal, and report
+  handoff legible in a short demo.
 
 ### July 19: Verified IDOR Replay
 

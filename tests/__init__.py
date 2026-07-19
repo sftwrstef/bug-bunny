@@ -1,2 +1,1 @@
 """Bug Bunny test suite."""
-

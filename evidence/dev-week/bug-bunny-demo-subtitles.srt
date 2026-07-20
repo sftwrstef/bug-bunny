@@ -1,29 +1,29 @@
 1
-00:00:00,000 --> 00:00:04,000
-Bug Bunny is an evidence console
-for authorized Web research.
+00:00:00,100 --> 00:00:03,702
+Bug Bunny is an evidence console for authorized Web research.
 
 2
-00:00:04,000 --> 00:00:08,000
-The explicit scope gate records the target,
-testing boundary, and authorization.
+00:00:03,652 --> 00:00:06,879
+The scope gate records the target and explicit approval.
 
 3
-00:00:08,000 --> 00:00:15,000
-The Safe Web audit captures bounded,
-read-only evidence from the live target.
+00:00:06,879 --> 00:00:14,947
+One click runs a bounded, read-only Web audit to capture headers, routes,
+cookies, CORS behavior, and reproduction commands.
 
 4
-00:00:15,000 --> 00:00:19,000
-Surface Map shows the safe routes
-and signals that deserve human review.
+00:00:14,947 --> 00:00:19,015
+Surface Map shows the safely reached routes and candidate signals.
 
 5
-00:00:19,000 --> 00:00:29,000
-The same-state IDOR replay proves legitimate access,
-then demonstrates victim data exposure.
+00:00:19,015 --> 00:00:26,254
+When a claim needs proof, the same-state IDOR replay proves legitimate access,
+then demonstrates victim-private data exposure.
 
 6
-00:00:29,000 --> 00:00:37,000
-Codex and GPT-5.6 Sol turn collected evidence
-into a reproducible, proof-ready report.
+00:00:26,254 --> 00:00:30,152
+The final report packages commands, evidence, and status.
+
+7
+00:00:30,152 --> 00:00:36,788
+Built in Codex with GPT-5.6 Sol, Bug Bunny converts real signals into verifiable reports.

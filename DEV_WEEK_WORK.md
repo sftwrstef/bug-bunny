@@ -69,3 +69,6 @@ in Codex Desktop with GPT-5.6 Sol in primary session
 - Safe Web UI capture: `evidence/dev-week/safe-web-hunter.png`.
 - JSON proof: `evidence/dev-week/verified-idor-proof.json`.
 - UI capture: `evidence/dev-week/dev-week-verified-idor.png`.
+- Narrated demo source: `evidence/dev-week/bug-bunny-demo-narration.txt` and
+  `evidence/dev-week/bug-bunny-demo-subtitles.srt`; the generated H.264/AAC
+  upload file is `output/demo/bug-bunny-demo.mp4` (36.5 seconds, local-only).

@@ -2,6 +2,10 @@
   "name": "bug-bunny-ai",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0",
+    "npm": ">=10"
+  },
   "type": "module",
   "scripts": {
     "dev": "node server/dev.js",
@@ -11,7 +15,11 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "prove:idor": "python3 -m proofs.idor_proof --output artifacts/idor-before.json",
-    "test:proof": "python3 -m unittest tests.test_idor_proof -v",
+    "fixture:replay:vulnerable": "python3 -m proofs.authenticated_replay_demo --mode vulnerable --port 8899",
+    "fixture:replay:secure": "python3 -m proofs.authenticated_replay_demo --mode secure --port 8899",
+    "demo:replay:record": "node scripts/record_authenticated_replay_demo.mjs",
+    "demo:replay:render": ".venv/bin/python scripts/render_authenticated_replay_demo.py",
+    "test:proof": ".venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v",
     "test:web": "node --test tests/web_audit_test.mjs"
   },
   "dependencies": {

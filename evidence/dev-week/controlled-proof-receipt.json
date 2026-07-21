@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-07-21T08:33:11.006956+00:00",
+  "run_id": "dea7f5e5-37ab-4512-984a-071b2f7b1d60",
+  "program_profile": "intigriti-pwn-proof",
+  "target_host": "app.pwn.intigriti.rocks",
+  "evidence_origin": "manual_redacted_import",
+  "object": {
+    "kind": "submission_draft",
+    "locator_sha256": "d958b92db758fe4c2a8499cec15b67c1d03d2ce69827d23e53cb8c59cd102f89",
+    "raw_locator_stored": false
+  },
+  "actors": {
+    "owner": "bugbunny",
+    "peer": "sftwr_bugbunny_b_0721",
+    "both_researcher_controlled": true,
+    "sessions_isolated": true
+  },
+  "control": {
+    "owner_access_succeeded": true,
+    "owner_marker_observed": true
+  },
+  "replay": {
+    "attempts": 2,
+    "outcomes": [
+      "forbidden",
+      "forbidden"
+    ],
+    "owner_marker_observed": false,
+    "third_party_data_observed": false
+  },
+  "classification": {
+    "verdict": "INVALID",
+    "code": "NO_IDOR",
+    "tested_scope": "tested_draft_only",
+    "submission_ready": false,
+    "finding_rows_created": 0
+  },
+  "kimi_review": {
+    "provider": "opencode-go",
+    "model": "opencode-go/kimi-k3",
+    "session_id": "ses_07c30eea3ffeqIZj3sx2p1cwx7",
+    "input_sha256": "b4aab2997d31ae2fa4ade26e6989292e1bb5d2c451ca596a960d07c5f1dbd7e2",
+    "cost_usd": 0.031284,
+    "latency_ms": 52828,
+    "tokens": {
+      "total": 3116,
+      "input": 1288,
+      "output": 819,
+      "reasoning": 1009,
+      "cache_write": 0,
+      "cache_read": 0
+    },
+    "verdict": "INVALID",
+    "submission_ready": false
+  },
+  "redaction": {
+    "raw_http_bodies_stored": false,
+    "headers_stored": false,
+    "credentials_stored": false,
+    "cookies_or_tokens_stored": false,
+    "email_addresses_stored": false,
+    "raw_object_identifiers_or_urls_stored": false
+  }
+}

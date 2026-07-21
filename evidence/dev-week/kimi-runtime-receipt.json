@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "provider": "opencode-go",
+  "model": "kimi-k3",
+  "model_ref": "opencode-go/kimi-k3",
+  "agent": "bug-bunny",
+  "session_id": "ses_07d26df27ffe0u4VZLYAhwPThD",
+  "cost_usd": 0.026421,
+  "tokens": {
+    "total": 2615,
+    "input": 1067,
+    "output": 694,
+    "reasoning": 854,
+    "cache": {
+      "write": 0,
+      "read": 0
+    }
+  },
+  "latency_ms": 57253,
+  "analyzed_at": "2026-07-21T04:05:52.443719+00:00",
+  "input_sha256": "d4b790ca78c2d8336601fbea092927089fa2019d0ccd0d8ad3802bb3f512d7a7",
+  "run_id": "a43dcf88-9b95-463f-bede-071159f04767",
+  "target": "https://portswigger.net/",
+  "request_log": [
+    {
+      "method": "GET",
+      "url": "https://portswigger.net/",
+      "status": 200,
+      "time": "2026-07-21T03:15:06.389Z"
+    }
+  ],
+  "deterministic_proof_supplied": false,
+  "analysis": {
+    "verdict": "OBSERVATION",
+    "summary": "A single passive GET to https://portswigger.net/ returned 200 with a recorded header inventory. The evidence explicitly frames itself as a posture capture, not a vulnerability determination. Most common hardening headers (content-security-policy, strict-transport-security, x-frame-options, x-content-type-options, cross-origin-opener-policy, cross-origin-resource-policy) are present; referrer-policy is recorded as absent; the redacted Set-Cookie carried Secure, HttpOnly, and SameSite=Lax attributes. No attacker, victim, exploit path, or incremental harm is established anywhere in the evidence, and deterministic_proof_supplied is false.",
+    "observed_facts": [
+      "One GET request to https://portswigger.net/ was logged at 2026-07-21T03:15:06.389Z and returned HTTP 200.",
+      "Recorded response headers include content-security-policy, strict-transport-security, x-frame-options, x-content-type-options, x-xss-protection, cross-origin-opener-policy, and cross-origin-resource-policy.",
+      "referrer-policy is recorded as absent from this single response; absence was observed only for this one response and was not tested across other pages or states.",
+      "A set-cookie header was present (value redacted); recorded cookie attributes are Secure=true, HttpOnly=true, SameSite=Lax, SameSite=Strict=false, SameSite=None=false.",
+      "The collector stored zero forms and zero same-origin links; these zero counts only mean the collector stored zero items, not that none exist.",
+      "The supplied observation is self-labeled severity Info with the hypothesis that it is a passive header inventory, not a vulnerability determination.",
+      "Policy receipt records GET as the only allowed method, an exact scope of the root URL, a budget of one request, and no policy text supplied."
+    ],
+    "unsupported_claims": [],
+    "likely_dismissal": "Not applicable as submitted since no vulnerability is claimed; if the absent referrer-policy header were submitted as a finding on its own, it would likely be dismissed as informational with no demonstrated, victim-centered security impact.",
+    "attacker": "None identified",
+    "victim": "None identified",
+    "asset_or_authority_at_risk": "None identified",
+    "safest_next_manual_step": "A human operator reads the actual program policy text at the supplied policy URL to determine whether informational posture observations are reportable at all, and reviews this header inventory manually in a browser. No further automated requests, subdomains, payloads, or proof traffic should be generated without separate human approval, consistent with the recorded scope boundary.",
+    "proof_requirements": [
+      "Exact program policy text confirming the relevant finding class is in scope; the policy URL alone is only a receipt reference.",
+      "A concrete victim-centered impact hypothesis tied to a recorded observation (e.g., a demonstrated sensitive data exposure path), not a missing header by itself.",
+      "Deterministic proof establishing the attacker, victim, control, exploit branch, and incremental harm, with deterministic_proof_supplied set to true, before any VERIFIED verdict could be considered.",
+      "Human approval before any additional traffic beyond the recorded single-GET budget."
+    ],
+    "submission_ready": false
+  },
+  "server_gate": "Model output is advisory. VERIFIED requires a separate deterministic proof artifact."
+}

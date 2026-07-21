@@ -1,0 +1,23 @@
+{
+  "run_id": "b2784892-6cde-4bfd-a95d-33a30361327e",
+  "provider": "opencode-go",
+  "model": "opencode-go/kimi-k3",
+  "agent": "bug-bunny",
+  "session_id": "ses_07a422d7effeOrvAhxlSlRA9B8",
+  "cost_usd": 0.051123,
+  "latency_ms": 114935,
+  "tokens": {
+    "total": 4577,
+    "input": 1461,
+    "output": 1196,
+    "reasoning": 1920
+  },
+  "redacted_input_sha256": "3e031bc0c67942f323df6a59777702b69b1f145550061e158ab4da5bd013a354",
+  "authenticated_replay_integrity_sha256": "1d8fc9daa17241f14aab0bcb6c3e7e70ef9c132bd325860d587db6dce1857bff",
+  "deterministic_verdict": "VERIFIED",
+  "classification": "CROSS_ACCOUNT_OBJECT_EXPOSURE",
+  "model_verdict": "VERIFIED",
+  "submission_ready": false,
+  "server_gate": "The validated authenticated-replay receipt controls the tested branch verdict; live results still require human scope, impact, and duplicate review.",
+  "safest_next_step": "Archive this as fixture-validation evidence only. Any live test requires fresh written scope confirmation, a new bounded run, and human impact and duplicate review."
+}

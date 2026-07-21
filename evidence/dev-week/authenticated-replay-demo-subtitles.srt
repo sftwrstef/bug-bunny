@@ -1,0 +1,31 @@
+1
+00:00:00,000 --> 00:00:15,000
+Bug Bunny is a local-first proof console for authorized Web research.
+It first shows the reusable reviewed-program boundary, then safely switches
+to a localhost fixture with two synthetic accounts and a four-request ceiling.
+
+2
+00:00:15,000 --> 00:00:25,000
+Each account contributes its own DevTools cURL capture.
+Tokens, object IDs, URLs, markers, and bodies stay ephemeral.
+
+3
+00:00:25,000 --> 00:00:36,000
+The redaction preview confirms one endpoint shape, one changed locator,
+and two distinct sessions before any traffic is sent.
+
+4
+00:00:36,000 --> 00:00:52,000
+Bug Bunny proves B→B and A→A, then derives B→A by changing only the session.
+A's marker appears under B, so execution stops at 3 of 4 requests.
+
+5
+00:00:52,000 --> 00:01:05,000
+The write-once receipt keeps only hashes, outcome booleans, timing,
+network controls, and integrity metadata.
+
+6
+00:01:05,000 --> 00:01:18,680
+Kimi can challenge the receipt separately; this capture stops at the result.
+GPT-5.6 Sol helped turn a hard-coded IDOR demo into a structural cURL parser,
+ephemeral-secret boundary, four-request verdict gate, and negative fixtures.

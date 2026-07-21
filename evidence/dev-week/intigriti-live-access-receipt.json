@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "run_id": "9bf14443-062d-40ea-a9fe-3ab9ca1592ee",
+  "recorded_at": "2026-07-21T04:55:37.701376+00:00",
+  "target": "https://app.pwn.intigriti.rocks/",
+  "platform": "Intigriti",
+  "program": "Intigriti",
+  "researcher_username": "sftwr",
+  "policy_url": "https://app.intigriti.com/programs/intigriti/intigriti/detail",
+  "policy_snapshot_date": "2026-07-21",
+  "scope": {
+    "profile": "intigriti-pwn",
+    "exact_target": "https://app.pwn.intigriti.rocks/",
+    "allowed_host_suffix": ".pwn.intigriti.rocks",
+    "allowed_methods": ["GET", "HEAD"],
+    "operational_requests_per_second": 2,
+    "published_requests_per_second": 10,
+    "request_budget": 24,
+    "attribution_headers": ["X-Intigriti-Username", "User-Agent"]
+  },
+  "execution": {
+    "requests_sent": 3,
+    "request_urls": [
+      "https://app.pwn.intigriti.rocks/",
+      "https://app.pwn.intigriti.rocks/robots.txt",
+      "https://app.pwn.intigriti.rocks/.well-known/security.txt"
+    ],
+    "response_statuses": [403, 403, 403],
+    "public_assets_mapped": 0,
+    "client_endpoint_candidates": 0,
+    "stopped_reason": "The PWN environment returned CloudFront 403 responses because its required VPN access path was not active. No bypass was attempted."
+  },
+  "submission_gate": {
+    "reportable": false,
+    "reason": "Access-gate evidence is not a vulnerability and no victim-centered impact was demonstrated."
+  }
+}

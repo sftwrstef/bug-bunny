@@ -6,7 +6,7 @@ const python = existsSync('.venv/bin/python') ? '.venv/bin/python' : 'python3';
 const children = [
   spawn('node', ['server/index.js'], {
     stdio: 'inherit',
-    env: { ...process.env, BUG_BUNNY_API_PORT: '8787' }
+    env: { ...process.env, CONTROLX_API_PORT: '8787' }
   }),
   spawn(python, ['-m', 'uvicorn', 'backend.main:app', '--host', '127.0.0.1', '--port', '8000'], { stdio: 'inherit', env: process.env }),
   spawn('npx', ['vite', '--host', '127.0.0.1', '--port', '5173'], { stdio: 'inherit', env: process.env })

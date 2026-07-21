@@ -453,7 +453,7 @@ async function readLimitedText(response, maxBytes) {
     if (done) break;
     received += value.byteLength;
     if (received > maxBytes) {
-      await reader.cancel('Bug Bunny response-size limit reached');
+      await reader.cancel('ControlX response-size limit reached');
       throw new Error(`Response exceeded the ${maxBytes}-byte safety limit`);
     }
     text += decoder.decode(value, { stream: true });
@@ -489,7 +489,7 @@ async function fetchText(rawUrl, options = {}) {
         redirect: 'manual',
         signal: controller.signal,
         headers: {
-          'user-agent': 'BugBunnyLocal/0.2 authorized-safe-web-audit',
+          'user-agent': 'ControlXLocal/0.3 authorized-safe-web-audit',
           ...(options.headers || {})
         }
       });
@@ -582,7 +582,7 @@ function externalRequestHeaders(audit) {
   if (audit.policyReceipt.profileId !== INTIGRITI_PWN_PROFILE_ID) return {};
   const username = audit.policyReceipt.researcherUsername;
   return {
-    'user-agent': `BugBunny/0.3 Intigriti-${username} evidence-mapper`,
+    'user-agent': `ControlX/0.3 Intigriti-${username} evidence-mapper`,
     'x-intigriti-username': username
   };
 }
@@ -1083,7 +1083,7 @@ function renderReport(audit) {
   const externalProgram = isExternalProgramMode(audit.mode);
   const boundedExternal = audit.policyReceipt?.profileId === INTIGRITI_PWN_PROFILE_ID;
   const lines = [
-    externalProgram ? `# Bug Bunny External Program Observation Ledger` : `# Bug Bunny.ai Local Audit Report`,
+    externalProgram ? `# ControlX External Program Observation Ledger` : `# ControlX Local Audit Report`,
     ``,
     `Target: ${audit.target.url}`,
     `Mode: ${audit.mode}`,

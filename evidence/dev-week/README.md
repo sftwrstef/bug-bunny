@@ -1,11 +1,33 @@
 # Dev Week evidence
 
+> **Historical naming note:** ControlX is the current product name. Existing
+> receipts, filenames, screenshots, narration sources, and provider references
+> remain byte-for-byte historical evidence and are not relabelled retroactively.
+
 ```text
 evidence is the product surface
 secrets are not evidence
 ```
 
-These files document Bug Bunny's post-baseline Dev Week work.
+These files document ControlX's post-baseline Dev Week work.
+
+## Current ControlX rebrand assets
+
+- `controlx-authenticated-replay-demo-narration.txt` and
+  `controlx-authenticated-replay-demo-subtitles.srt` are the current,
+  model-neutral voiceover and captions for a re-recorded ControlX demo.
+- `controlx-authorized-proof-console.png` is a browser-verified, zero-console-
+  error capture of the rebranded current UI.
+- `controlx-youtube-thumbnail.png` is the 16:9 upload thumbnail for the public
+  narrated demo.
+- `controlx-authenticated-replay-demo.webm` and
+  `controlx-authenticated-replay-verified.png` are the fresh local-only
+  ControlX recording and proof-state capture. The upload-ready H.264/AAC render
+  is local at `output/demo/controlx-authenticated-replay-demo.mp4`; its audio
+  was checked at 25–30 and 70–75 seconds to guard against the previous mute
+  regression.
+  These current assets do not replace the historically named source artifacts
+  below.
 
 - `kimi-runtime-receipt.json` records a historical optional-AI smoke test using
   OpenCode Go / Kimi K3 for evidence

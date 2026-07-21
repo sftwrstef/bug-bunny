@@ -1,1 +1,1 @@
-"""Executable security proofs bundled with Bug Bunny."""
+"""Executable security proofs bundled with ControlX."""

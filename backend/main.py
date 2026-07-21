@@ -39,11 +39,25 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 DB_PATH = ROOT_DIR / "audit_console.sqlite3"
 RUNS_DIR = ROOT_DIR / "runs"
 ARTIFACTS_DIR = ROOT_DIR / "artifacts"
-WEB_ENGINE_URL = os.environ.get("BUG_BUNNY_WEB_ENGINE_URL", "http://127.0.0.1:8787")
+
+
+def configured_env(*names: str, default: str = "") -> str:
+    """Read a ControlX configuration value with an optional default."""
+    for name in names:
+        value = os.environ.get(name)
+        if value:
+            return value
+    return default
+
+
+WEB_ENGINE_URL = configured_env(
+    "CONTROLX_WEB_ENGINE_URL",
+    default="http://127.0.0.1:8787",
+)
 WEB_AUDIT_TIMEOUT_SECONDS = 90
-AI_MODEL = os.environ.get("BUG_BUNNY_AI_MODEL", "opencode-go/kimi-k3")
-AI_AGENT = os.environ.get("BUG_BUNNY_AI_AGENT", "bug-bunny")
-AI_TIMEOUT_SECONDS = int(os.environ.get("BUG_BUNNY_AI_TIMEOUT_SECONDS", "180"))
+AI_MODEL = configured_env("CONTROLX_AI_MODEL")
+AI_AGENT = configured_env("CONTROLX_AI_AGENT", default="controlx")
+AI_TIMEOUT_SECONDS = int(configured_env("CONTROLX_AI_TIMEOUT_SECONDS", default="180"))
 AI_ARTIFACT_NAME = "ai-analysis.json"
 INTIGRITI_PWN_PROFILE_ID = "intigriti-pwn"
 INTIGRITI_PWN_PROOF_PROFILE_ID = "intigriti-pwn-proof"
@@ -202,7 +216,7 @@ class AIAnalysisModel(BaseModel):
     submission_ready: bool
 
 
-app = FastAPI(title="Bug Bunny.ai Local Audit Console", version="0.2.0")
+app = FastAPI(title="ControlX Authorized Proof Console", version="0.3.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -602,7 +616,7 @@ def build_external_policy_receipt(payload: AuditCreateRequest, target: str) -> d
                     "create one harmless Account A-owned object with a unique benign marker",
                     "create one harmless marked object under each controlled account",
                     "capture each account's legitimate GET with DevTools Copy as cURL",
-                    "preview Bug Bunny's secret-free request shape before execution",
+                    "preview ControlX's secret-free request shape before execution",
                     "run B-to-B and A-to-A controls, then replay A's known object with only B's session headers",
                     "repeat only a denied replay; stop immediately if A's marker is exposed",
                 ],
@@ -781,7 +795,7 @@ def web_engine_request(path: str, payload: dict[str, Any] | None = None) -> dict
     except (URLError, TimeoutError) as error:
         raise HTTPException(
             status_code=503,
-            detail="Safe Web engine is unavailable. Start Bug Bunny with `npm run dev`.",
+            detail="Safe Web engine is unavailable. Start ControlX with `npm run dev`.",
         ) from error
 
 
@@ -1112,7 +1126,7 @@ def build_ai_input(run: AuditRunModel, findings: list[FindingModel]) -> dict[str
 
 
 def ai_prompt(ai_input: dict[str, Any]) -> str:
-    return """You are the bounded reasoning stage of Bug Bunny, an authorized Web security evidence tool.
+    return """You are the bounded reasoning stage of ControlX, an authorized Web security evidence tool.
 Analyze only the JSON evidence below. Do not use tools, inspect files, make network requests, or infer facts not explicitly supplied.
 Separate facts from hypotheses. Never call a missing header, exposed route, or scanner signal a vulnerability without victim-centered reproducible impact.
 The policy URL is only a receipt reference; it is not policy text. Do not claim that this program, or programs generally, include or exclude a finding class unless exact policy text is supplied.
@@ -1180,6 +1194,14 @@ def opencode_executable() -> str | None:
 
 
 def opencode_status() -> dict[str, Any]:
+    if not AI_MODEL:
+        return {
+            "ready": False,
+            "provider": "not-configured",
+            "model": None,
+            "agent": AI_AGENT,
+            "detail": "Optional AI review is not configured. Set CONTROLX_AI_MODEL to any authenticated OpenCode model.",
+        }
     executable = opencode_executable()
     if not executable:
         return {"ready": False, "provider": "opencode-go", "model": AI_MODEL, "detail": "OpenCode CLI is not installed."}
@@ -1229,6 +1251,11 @@ def apply_analysis_server_gate(
 
 
 def run_opencode_analysis(run: AuditRunModel, findings: list[FindingModel]) -> dict[str, Any]:
+    if not AI_MODEL:
+        raise HTTPException(
+            status_code=503,
+            detail="Optional AI review is not configured. Set CONTROLX_AI_MODEL to an authenticated OpenCode model.",
+        )
     executable = opencode_executable()
     if not executable:
         raise HTTPException(status_code=503, detail="OpenCode CLI is not installed or not on PATH.")
@@ -1261,7 +1288,7 @@ def run_opencode_analysis(run: AuditRunModel, findings: list[FindingModel]) -> d
                 "--dir",
                 str(ROOT_DIR),
                 "--title",
-                f"Bug Bunny evidence triage {run.run_id}",
+                f"ControlX evidence triage {run.run_id}",
                 prompt,
             ],
             cwd=ROOT_DIR,
@@ -1343,7 +1370,7 @@ def response_for_run(run: AuditRunModel, findings: list[FindingModel], markdown:
 
 @app.get("/api/health")
 def health() -> dict[str, Any]:
-    return {"ok": True, "service": "bug-bunny-fastapi", "db_path": str(DB_PATH)}
+    return {"ok": True, "service": "controlx-fastapi", "db_path": str(DB_PATH)}
 
 
 @app.get("/api/ai/status")
@@ -1373,7 +1400,7 @@ def create_audit(payload: AuditCreateRequest) -> dict[str, Any]:
 
     target_type = classify_target(target)
     if target_type != "url":
-        raise HTTPException(status_code=400, detail="Bug Bunny currently accepts HTTP(S) target URLs only.")
+        raise HTTPException(status_code=400, detail="ControlX currently accepts HTTP(S) target URLs only.")
     parsed = urlparse(target)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
         raise HTTPException(status_code=400, detail="Target URL must include http:// or https://.")
@@ -1537,9 +1564,9 @@ def run_web_audit(run_id: str) -> dict[str, Any]:
 def preview_authenticated_replay(
     run_id: str,
     payload: AuthenticatedReplayPreviewRequest,
-    x_bug_bunny_intent: str | None = Header(default=None),
+    x_controlx_intent: str | None = Header(default=None),
 ) -> dict[str, Any]:
-    if x_bug_bunny_intent != AUTHENTICATED_REPLAY_INTENT:
+    if x_controlx_intent != AUTHENTICATED_REPLAY_INTENT:
         raise HTTPException(status_code=400, detail="Authenticated replay requires the explicit intent header.")
     run = get_run_or_404(run_id)
     _plan, preview = prepare_authenticated_replay(
@@ -1554,9 +1581,9 @@ def preview_authenticated_replay(
 def run_authenticated_replay(
     run_id: str,
     payload: AuthenticatedReplayExecuteRequest,
-    x_bug_bunny_intent: str | None = Header(default=None),
+    x_controlx_intent: str | None = Header(default=None),
 ) -> dict[str, Any]:
-    if x_bug_bunny_intent != AUTHENTICATED_REPLAY_INTENT:
+    if x_controlx_intent != AUTHENTICATED_REPLAY_INTENT:
         raise HTTPException(status_code=400, detail="Authenticated replay requires the explicit intent header.")
     run = get_run_or_404(run_id)
     plan, preview = prepare_authenticated_replay(
@@ -1796,7 +1823,7 @@ def generate_report(run_id: str) -> dict[str, Any]:
         else "authenticated-capture-replay" if authenticated_replay else "authorized-read-only" if engine_audit else "mock"
     )
     lines = [
-        "# Bug Bunny External Program Observation Ledger" if run.mode == "external_program" else "# Bug Bunny.ai Local Audit Report",
+        "# ControlX External Program Observation Ledger" if run.mode == "external_program" else "# ControlX Local Audit Report",
         "",
         f"- Run ID: `{run.run_id}`",
         f"- Target: `{run.target}`",

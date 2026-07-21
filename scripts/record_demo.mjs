@@ -2,9 +2,9 @@ import { mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 
-const appUrl = process.env.BUG_BUNNY_DEMO_URL || 'http://127.0.0.1:5173';
+const appUrl = process.env.CONTROLX_DEMO_URL || 'http://127.0.0.1:5173';
 const outputDir = resolve(process.cwd(), 'output', 'demo');
-const outputPath = resolve(outputDir, 'bug-bunny-demo.webm');
+const outputPath = resolve(outputDir, 'controlx-demo.webm');
 const pause = (milliseconds) => new Promise((resolvePause) => setTimeout(resolvePause, milliseconds));
 
 await mkdir(outputDir, { recursive: true });

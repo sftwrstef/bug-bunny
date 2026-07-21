@@ -1,11 +1,15 @@
 # Dev Week work ledger
 
+> **Historical naming note:** the current product is branded **ControlX**. This
+> ledger retains dated provider, receipt, account, and filename identifiers only
+> where they are needed to preserve the evidence trail.
+
 Submission period: July 13, 2026 at 9:00 AM PT through July 21, 2026 at
 5:00 PM PT.
 
 ## Administrative baseline work
 
-- July 19: Imported the untouched May Bug Bunny source into the Dev Week
+- July 19: Imported the untouched May baseline source into the Dev Week
   workspace so subsequent work can be tracked in Git.
 - July 19: Added baseline disclosure, source hashes, and pre-existing QA
   screenshots.
@@ -121,7 +125,7 @@ PortSwigger observation run. Kimi made no target request. It returned
 - Replaced the one-response fallback for this profile with a hard-limited live
   surface mapper: 24 `GET`/`HEAD` requests at no more than 2 requests/second.
 - Requires the operator's real Intigriti username and sends both the required
-  `X-Intigriti-Username` header and an attributed Bug Bunny user agent.
+  `X-Intigriti-Username` header and an attributed ControlX user agent.
 - Enforces the exact `*.pwn.intigriti.rocks` host suffix, public DNS resolution,
   same-origin redirects, response-size limits, request timeouts, and the request
   budget in the engine—not only in UI copy.
@@ -140,7 +144,7 @@ PortSwigger observation run. Kimi made no target request. It returned
 - Ran the first real attributed profile as Intigriti researcher `sftwr` on July
   21. The exact target, `app.pwn.intigriti.rocks`, returned CloudFront `403` for
   the root, `robots.txt`, and `.well-known/security.txt`, consistent with the
-  program's required VPN not being active. Bug Bunny stopped after three of the
+  program's required VPN not being active. ControlX stopped after three of the
   24 allowed requests, did not bypass the access gate, and asserted no finding.
 - Preserved the public-safe execution receipt at
   `evidence/dev-week/intigriti-live-access-receipt.json`; the full local raw
@@ -162,8 +166,8 @@ PortSwigger observation run. Kimi made no target request. It returned
 - Kept controlled proof separate from Web-scanner evidence and from findings.
   A denied replay closes one hypothesis; it does not create an informational
   pseudo-finding or claim that the target is globally free of IDOR.
-- Completed the first real PWN run with controlled Account A `bugbunny` and
-  Account B `sftwr_bugbunny_b_0721`: A's owner control succeeded, B was denied
+- Completed the first real PWN run with two researcher-controlled account
+  aliases: A's owner control succeeded, B was denied
   twice, no A marker or third-party data appeared, and testing stopped.
 - Derived `INVALID`, `NO_IDOR`, `tested_draft_only`, and
   `submission_ready=false` server-side. Kimi independently reviewed the
@@ -241,6 +245,23 @@ This is a material Dev Week extension of the original fixed localhost IDOR
 template: the request shape, origin, locator, credentials, controls, and result
 now come from a policy-gated capture rather than a hard-coded endpoint.
 
+### July 21: ControlX identity and runtime-neutralization
+
+- Rebranded the current product interface, reports, fixture output, package
+  metadata, OpenCode agent, Devpost packet, and README as **ControlX** with the
+  public lockup **CTRL/X** and tagline **“Find the delta. Prove the impact.”**
+- Replaced the mascot-shaped icon with a control-path X mark and refreshed the
+  public README with browser-verified ControlX UI and authenticated-replay
+  captures.
+- Removed the provider-specific runtime default. Optional AI review now requires
+  an operator-selected `CONTROLX_AI_MODEL`, accepts any authenticated OpenCode
+  model, and remains tool-denied and advisory.
+- Preserved pre-rebrand source files, historic receipts, provider records,
+  filenames, hashes, and original evidence copy without retroactive alteration.
+- Re-recorded the local fixture workflow under the ControlX brand and rendered a
+  77.84-second H.264/AAC demo. Audio was verified as non-silent at 25–30 and
+  70–75 seconds.
+
 ## Verification receipts
 
 - `npm run test:proof`: **32 tests pass**, including structural capture parsing,
@@ -282,10 +303,10 @@ now come from a policy-gated capture rather than a hard-coded endpoint.
   `evidence/dev-week/authenticated-replay-receipt.json`.
 - Current replay/Kimi provenance:
   `evidence/dev-week/authenticated-replay-kimi-receipt.json`.
-- Updated browser recording: `evidence/dev-week/authenticated-replay-demo.webm`;
-  narrated upload file: `output/demo/bug-bunny-authenticated-replay-demo.mp4`
+- Updated browser recording: `evidence/dev-week/controlx-authenticated-replay-demo.webm`;
+  narrated upload file: `output/demo/controlx-authenticated-replay-demo.mp4`
   (78.68 seconds, H.264/AAC, local-only until upload).
 - Published feature commit
   `603e785696ff75733f86e8c1df91674787045e4d` to the public MIT-licensed
-  `sftwrstef/bug-bunny` repository and re-ran 32/32 proof tests, 6/6 Web tests,
+  `sftwrstef/ctrl-x` repository and re-ran 32/32 proof tests, 6/6 Web tests,
   and the production build from a fresh public clone.

@@ -12,10 +12,10 @@ DEFAULT_PORT = 8899
 
 # Fixture-only credentials and markers. They are intentionally public so a judge
 # can reproduce the authorization differential without using a real account.
-TOKEN_A = "bug-bunny-fixture-account-a"
-TOKEN_B = "bug-bunny-fixture-account-b"
-MARKER_A = "BUG_BUNNY_FIXTURE_OBJECT_A_7F3A"
-MARKER_B = "BUG_BUNNY_FIXTURE_OBJECT_B_91C2"
+TOKEN_A = "controlx-fixture-account-a"
+TOKEN_B = "controlx-fixture-account-b"
+MARKER_A = "CONTROLX_FIXTURE_OBJECT_A_7F3A"
+MARKER_B = "CONTROLX_FIXTURE_OBJECT_B_91C2"
 
 OBJECTS = {
     "A": {
@@ -44,7 +44,7 @@ def _canonical_json(value: Any) -> bytes:
 
 def make_handler(mode: str) -> type[BaseHTTPRequestHandler]:
     class AuthenticatedReplayHandler(BaseHTTPRequestHandler):
-        server_version = "BugBunnyAuthenticatedReplayFixture/1.0"
+        server_version = "ControlXAuthenticatedReplayFixture/1.0"
 
         def do_GET(self) -> None:  # noqa: N802 - stdlib handler method name
             parsed = urlparse(self.path)
@@ -109,7 +109,7 @@ def print_instructions(mode: str, port: int) -> None:
         f"-H 'Authorization: Bearer {TOKEN_B}' '{target}/api/objects/B'"
     )
 
-    print("Bug Bunny authenticated capture-and-replay fixture", flush=True)
+    print("ControlX authenticated capture-and-replay fixture", flush=True)
     print(f"MODE={mode}", flush=True)
     print(f"TARGET={target}", flush=True)
     print(f"MARKER_A={MARKER_A}", flush=True)
@@ -119,7 +119,7 @@ def print_instructions(mode: str, port: int) -> None:
     print("Copy-as-cURL (account B owner capture):", flush=True)
     print(account_b_command, flush=True)
     print(
-        "Bug Bunny derives the B-token -> A-object replay from these equivalent owner captures.",
+        "ControlX derives the B-token -> A-object replay from these equivalent owner captures.",
         flush=True,
     )
     print("Fixture is bound to localhost only. Press Ctrl-C to stop.", flush=True)
@@ -127,7 +127,7 @@ def print_instructions(mode: str, port: int) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Serve Bug Bunny's localhost-only authenticated replay demo fixture."
+        description="Serve ControlX's localhost-only authenticated replay demo fixture."
     )
     parser.add_argument(
         "--mode",

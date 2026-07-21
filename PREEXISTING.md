@@ -1,4 +1,8 @@
-# Pre-existing Bug Bunny baseline
+# Pre-existing audit-console baseline
+
+> **Historical naming note:** the current product is branded **ControlX**. This
+> baseline record documents the source snapshot that existed before Dev Week;
+> it is not rewritten as new work.
 
 This directory was imported on July 19, 2026 from the untouched May 1, 2026
 project snapshot at:
@@ -10,7 +14,7 @@ The import date does not make the code new hackathon work. The following were
 already present before the submission period opened on July 13, 2026 at
 9:00 AM Pacific Time:
 
-- React/Vite Bug Bunny audit-console interface.
+- React/Vite audit-console interface.
 - FastAPI and SQLite mock-audit backend.
 - Separate Node HTTP reconnaissance and reporting engine.
 - Scope, findings, PoC, report, evidence, timeline, and agent-card views.
@@ -25,4 +29,3 @@ outputs, and Python bytecode were intentionally excluded.
 
 Hashes for the imported source and screenshots are recorded in
 `evidence/pre-existing/SHA256SUMS`.
-

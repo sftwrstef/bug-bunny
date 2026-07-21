@@ -1,20 +1,20 @@
-# Bug Bunny — Devpost submission packet
+# ControlX — Devpost submission packet
 
 > Copy-ready draft. Replace every `TODO` before submitting.
 
 ## Submission fields
 
-- **Project name:** Bug Bunny
+- **Project name:** ControlX
 - **Track:** Developer Tools
-- **Tagline:** Capture the request. Replay the claim. Preserve the proof.
-- **Repository:** `https://github.com/sftwrstef/bug-bunny`
-- **Public YouTube demo:** `TODO: upload output/demo/bug-bunny-final-demo.mp4`
+- **Tagline:** Find the delta. Prove the impact.
+- **Repository:** `https://github.com/sftwrstef/ctrl-x`
+- **Public YouTube demo:** https://youtu.be/VzguBCxDU9o
 - **Codex `/feedback` session ID:** `TODO: run /feedback in the primary build task`
-- **Feature commit:** `603e785696ff75733f86e8c1df91674787045e4d`
+- **Feature commit:** `TODO: commit the ControlX rebrand; preserve 603e785696ff75733f86e8c1df91674787045e4d as the authenticated-replay feature commit`
 
 ## What it does
 
-Bug Bunny is a local-first proof console for authorized Web security research.
+ControlX is a local-first proof console for authorized Web security research.
 It turns an object-level authorization hunch into a bounded, inspectable test:
 paste two DevTools **Copy as cURL** captures from isolated accounts you control,
 preview the redacted request shape, and run a deterministic B→B, A→A, B→A
@@ -32,7 +32,7 @@ cannot override the deterministic verdict or mark a live result ready for submis
 
 Bug hunters lose time between seeing suspicious behavior and producing proof a
 program can trust. Naive replay tools also make it easy to mix sessions, follow
-redirects, over-test a target, or mistake a status code for impact. Bug Bunny
+redirects, over-test a target, or mistake a status code for impact. ControlX
 builds the control experiment, safety boundary, and evidence receipt into one
 workflow. It is designed for local labs, systems the researcher owns, and
 explicitly authorized in-scope HackerOne, Bugcrowd, or Intigriti programs—not
@@ -76,8 +76,8 @@ key. AI review is optional and accepts any model available through the
 operator's authenticated OpenCode setup.
 
 ```bash
-git clone https://github.com/sftwrstef/bug-bunny.git
-cd bug-bunny
+git clone https://github.com/sftwrstef/ctrl-x.git controlx
+cd controlx
 npm ci
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
@@ -119,7 +119,7 @@ Final local verification receipt:
 - [x] Publish the repository under the MIT License.
 - [x] Verify the public feature commit from a clean clone: fresh dependencies,
       32/32 proof tests, 6/6 Web tests, and production build all pass.
-- [ ] Upload the narrated MP4 as a public YouTube video and paste the URL.
+- [x] Upload the narrated MP4 as a public YouTube video and paste the URL.
 - [ ] Run `/feedback` in the primary build task and paste its session ID.
 - [ ] Confirm public playback, repository access, README setup, and all Devpost
       fields before submitting.

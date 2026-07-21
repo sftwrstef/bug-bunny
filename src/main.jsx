@@ -324,11 +324,11 @@ function buildTimeline(audit, findings) {
 function BrandMark() {
   return (
     <div className="brand-mark" aria-hidden="true">
-      <svg viewBox="0 0 36 42" role="img">
-        <path className="ear left" d="M12 2 4 13l7 6 7-10Z" />
-        <path className="ear right" d="M24 2 18 9l7 10 7-6Z" />
-        <path className="shield" d="M18 10 5 17v14l13 8 13-8V17Z" />
-        <path className="core" d="M18 15 10 20v8l8 5 8-5v-8Z" />
+      <svg viewBox="0 0 42 42" role="img">
+        <rect className="frame" x="3" y="3" width="36" height="36" rx="11" />
+        <path className="slash slash-one" d="M13 12 29 30" />
+        <path className="slash slash-two" d="M29 12 13 30" />
+        <path className="pulse" d="M7 21h6m16 0h6" />
       </svg>
     </div>
   );
@@ -339,7 +339,7 @@ function Sidebar({ activeNav, setActiveNav, setTab }) {
     <aside className="sidebar">
       <div className="brand">
         <BrandMark />
-        <span>Bug<span> Bunny</span></span>
+        <span>CTRL<span>/X</span></span>
       </div>
       <nav className="nav">
         {navItems.map(({ label, icon: Icon }) => (
@@ -1160,7 +1160,7 @@ function AuthenticatedReplayWorkbench({ audit, onComplete, onAnalyze, busyAction
     try {
       const data = await api(`/api/audits/${audit.id}/authenticated-replay/preview`, {
         method: 'POST',
-        headers: { 'X-Bug-Bunny-Intent': 'authenticated-replay-v1' },
+        headers: { 'X-ControlX-Intent': 'authenticated-replay-v1' },
         body: JSON.stringify({ owner_curl: rawSecrets.current.ownerCurl, peer_curl: rawSecrets.current.peerCurl })
       });
       setPreview(data.preview);
@@ -1196,7 +1196,7 @@ function AuthenticatedReplayWorkbench({ audit, onComplete, onAnalyze, busyAction
     try {
       const data = await api(`/api/audits/${audit.id}/authenticated-replay/execute`, {
         method: 'POST',
-        headers: { 'X-Bug-Bunny-Intent': 'authenticated-replay-v1' },
+        headers: { 'X-ControlX-Intent': 'authenticated-replay-v1' },
         body: JSON.stringify({
           owner_curl: rawSecrets.current.ownerCurl,
           peer_curl: rawSecrets.current.peerCurl,
@@ -1228,7 +1228,7 @@ function AuthenticatedReplayWorkbench({ audit, onComplete, onAnalyze, busyAction
       <div className="panel-title proof-title">
         <div>
           <h3><ShieldCheck size={18} /> Authenticated replay · A versus B</h3>
-          <p>Paste two DevTools “Copy as cURL” requests for equivalent objects owned by isolated accounts you control. Bug Bunny validates and redacts before sending anything.</p>
+          <p>Paste two DevTools “Copy as cURL” requests for equivalent objects owned by isolated accounts you control. ControlX validates and redacts before sending anything.</p>
         </div>
         <span className="provider-chip"><ShieldCheck size={14} /> local secrets · ephemeral</span>
       </div>
@@ -1862,7 +1862,7 @@ function App() {
               <div>
                 <p className="eyebrow"><span />Authorized research workspace</p>
                 <h1>{activeNav === 'Proof Lab' ? 'Proof Lab' : activeNav}</h1>
-                <p className="title-subtitle">Collect deterministic evidence. Let an optional AI challenge the claim. Verify impact before reporting.</p>
+                <p className="title-subtitle">Find the delta. Prove the impact. Bounded replay, control paths, and evidence receipts for authorized research.</p>
                 {activeNav === 'Findings' && <div className="tabs">
                   {tabs.map((name) => (
                     <button className={tab === name ? 'active' : ''} onClick={() => setTab(name)} key={name}>

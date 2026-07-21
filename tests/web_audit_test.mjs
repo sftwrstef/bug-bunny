@@ -32,7 +32,7 @@ test('authorized safe Web audit captures live evidence and bounded findings', as
       return;
     }
     response.writeHead(200, { 'content-type': 'text/html', 'x-fixture-request-method': request.method });
-    response.end('<html><head><title>Bug Bunny Fixture</title></head><body><a href="/api">API</a><form></form></body></html>');
+    response.end('<html><head><title>ControlX Fixture</title></head><body><a href="/api">API</a><form></form></body></html>');
   });
 
   await new Promise((resolve) => fixture.listen(0, '127.0.0.1', resolve));
@@ -46,7 +46,7 @@ test('authorized safe Web audit captures live evidence and bounded findings', as
     assert.equal(audit.status, 'complete');
     assert.equal(audit.target.origin, `http://127.0.0.1:${address.port}`);
     assert.equal(audit.evidence.http.status, 200);
-    assert.equal(audit.evidence.http.title, 'Bug Bunny Fixture');
+    assert.equal(audit.evidence.http.title, 'ControlX Fixture');
     assert.equal(audit.evidence.http.forms, 1);
     assert.ok(audit.evidence.routes.length >= 10);
     assert.ok(audit.evidence.cors);

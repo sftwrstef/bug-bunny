@@ -1,5 +1,5 @@
 {
-  "name": "bug-bunny-ai",
+  "name": "controlx",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "node server/dev.js",
     "api": ".venv/bin/python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000",
-    "api:web": "BUG_BUNNY_API_PORT=8787 node server/index.js",
+    "api:web": "CONTROLX_API_PORT=8787 node server/index.js",
     "web": "vite --host 127.0.0.1 --port 5173",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",

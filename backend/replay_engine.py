@@ -577,7 +577,7 @@ def _headers_for(request: CapturedRequest, replacement_credentials: CapturedRequ
     headers.update({name: value for name, value in source.headers if _is_credential_header(name)})
     headers["accept-encoding"] = "identity"
     headers["connection"] = "close"
-    headers.setdefault("user-agent", "BugBunny/0.3 authenticated-replay")
+    headers.setdefault("user-agent", "ControlX/0.3 authenticated-replay")
     return headers
 
 

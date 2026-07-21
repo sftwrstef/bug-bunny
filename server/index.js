@@ -2,12 +2,12 @@ import express from 'express';
 import { createAudit, getAudit, listAudits } from './auditEngine.js';
 
 const app = express();
-const port = Number(process.env.BUG_BUNNY_API_PORT || 8787);
+const port = Number(process.env.CONTROLX_API_PORT || 8787);
 
 app.use(express.json({ limit: '1mb' }));
 
 app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, name: 'bug-bunny-safe-web-engine', mode: 'authorized-read-only' });
+  res.json({ ok: true, name: 'controlx-safe-web-engine', mode: 'authorized-read-only' });
 });
 
 app.get('/api/audits', (_req, res) => {
@@ -42,5 +42,5 @@ app.get('/api/audits/:id/report', (req, res) => {
 });
 
 app.listen(port, '127.0.0.1', () => {
-  console.log(`Bug Bunny.ai API listening on http://127.0.0.1:${port}`);
+  console.log(`ControlX API listening on http://127.0.0.1:${port}`);
 });

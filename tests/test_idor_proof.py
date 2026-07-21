@@ -16,7 +16,7 @@ class IdorProofTest(unittest.TestCase):
         self.assertEqual(proof["exploit"]["response"]["status"], 200)
         self.assertEqual(proof["exploit"]["response"]["body"]["id"], "victim")
         self.assertTrue(proof["assertions"]["victim_private_data_exposed"])
-        self.assertNotIn("bug-bunny-attacker-token", str(proof))
+        self.assertNotIn("controlx-attacker-token", str(proof))
 
 
 if __name__ == "__main__":

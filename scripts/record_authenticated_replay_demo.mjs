@@ -4,24 +4,24 @@ import { mkdir, rename, rm } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { chromium } from 'playwright';
 
-const projectRoot = resolve(process.env.BUG_BUNNY_PROJECT_ROOT || process.cwd());
-const appUrl = new URL(process.env.BUG_BUNNY_DEMO_URL || 'http://127.0.0.1:5173');
-const fixtureUrl = new URL(process.env.BUG_BUNNY_REPLAY_FIXTURE_URL || 'http://127.0.0.1:8899');
-const suppliedRunId = process.env.BUG_BUNNY_REPLAY_RUN_ID || '';
+const projectRoot = resolve(process.env.CONTROLX_PROJECT_ROOT || process.cwd());
+const appUrl = new URL(process.env.CONTROLX_DEMO_URL || 'http://127.0.0.1:5173');
+const fixtureUrl = new URL(process.env.CONTROLX_REPLAY_FIXTURE_URL || 'http://127.0.0.1:8899');
+const suppliedRunId = process.env.CONTROLX_REPLAY_RUN_ID || '';
 const outputPath = resolve(
   projectRoot,
-  process.env.BUG_BUNNY_REPLAY_DEMO_OUTPUT || 'evidence/dev-week/authenticated-replay-demo.webm'
+  process.env.CONTROLX_REPLAY_DEMO_OUTPUT || 'evidence/dev-week/controlx-authenticated-replay-demo.webm'
 );
 const screenshotPath = resolve(
   projectRoot,
-  process.env.BUG_BUNNY_REPLAY_SCREENSHOT_OUTPUT || 'evidence/dev-week/authenticated-replay-verified.png'
+  process.env.CONTROLX_REPLAY_SCREENSHOT_OUTPUT || 'evidence/dev-week/controlx-authenticated-replay-verified.png'
 );
 const videoScratchDir = resolve(projectRoot, 'output', 'playwright', 'authenticated-replay-demo');
 
-const FIXTURE_ACCOUNT_A_TOKEN = 'bug-bunny-fixture-account-a';
-const FIXTURE_ACCOUNT_B_TOKEN = 'bug-bunny-fixture-account-b';
-const FIXTURE_MARKER_A = 'BUG_BUNNY_FIXTURE_OBJECT_A_7F3A';
-const FIXTURE_MARKER_B = 'BUG_BUNNY_FIXTURE_OBJECT_B_91C2';
+const FIXTURE_ACCOUNT_A_TOKEN = 'controlx-fixture-account-a';
+const FIXTURE_ACCOUNT_B_TOKEN = 'controlx-fixture-account-b';
+const FIXTURE_MARKER_A = 'CONTROLX_FIXTURE_OBJECT_A_7F3A';
+const FIXTURE_MARKER_B = 'CONTROLX_FIXTURE_OBJECT_B_91C2';
 const fixtureOrigin = fixtureUrl.origin;
 const accountACurl = `curl --silent --show-error -H 'Authorization: Bearer ${FIXTURE_ACCOUNT_A_TOKEN}' '${fixtureOrigin}/api/objects/A'`;
 const accountBCurl = `curl --silent --show-error -H 'Authorization: Bearer ${FIXTURE_ACCOUNT_B_TOKEN}' '${fixtureOrigin}/api/objects/B'`;
@@ -38,7 +38,7 @@ const managedChildren = [];
 let shuttingDown = false;
 
 if (!existsSync(resolve(projectRoot, 'package.json'))) {
-  throw new Error(`Run this script from the Bug Bunny repository or set BUG_BUNNY_PROJECT_ROOT. Missing package.json under ${projectRoot}`);
+  throw new Error(`Run this script from the ControlX repository or set CONTROLX_PROJECT_ROOT. Missing package.json under ${projectRoot}`);
 }
 
 function childOutputTail(child) {
@@ -163,10 +163,10 @@ async function ensureApp() {
   const auditsUrl = new URL('/api/audits', appUrl).href;
   if (await endpointReady(auditsUrl, (body) => Array.isArray(body.audits))) return;
   if (appUrl.origin !== 'http://127.0.0.1:5173') {
-    throw new Error(`The configured Bug Bunny app is unavailable: ${appUrl.origin}. Start it before recording.`);
+    throw new Error(`The configured ControlX app is unavailable: ${appUrl.origin}. Start it before recording.`);
   }
 
-  const child = startManagedProcess('Bug Bunny dev stack', 'node', ['server/dev.js']);
+  const child = startManagedProcess('ControlX dev stack', 'node', ['server/dev.js']);
   await waitForEndpoint(auditsUrl, (body) => Array.isArray(body.audits), child, 45000);
 }
 
@@ -174,10 +174,10 @@ async function validateSuppliedRun() {
   if (!suppliedRunId) return '';
   const response = await fetchJson(new URL(`/api/audits/${suppliedRunId}`, appUrl).href);
   if (response.audit?.target !== `${fixtureOrigin}/`) {
-    throw new Error(`BUG_BUNNY_REPLAY_RUN_ID must target the exact localhost fixture origin ${fixtureOrigin}/.`);
+    throw new Error(`CONTROLX_REPLAY_RUN_ID must target the exact localhost fixture origin ${fixtureOrigin}/.`);
   }
   if (!['created', 'proof_scope_recorded'].includes(response.audit?.status)) {
-    throw new Error(`BUG_BUNNY_REPLAY_RUN_ID must be fresh; current status is ${response.audit?.status || 'unknown'}.`);
+    throw new Error(`CONTROLX_REPLAY_RUN_ID must be fresh; current status is ${response.audit?.status || 'unknown'}.`);
   }
   return suppliedRunId;
 }

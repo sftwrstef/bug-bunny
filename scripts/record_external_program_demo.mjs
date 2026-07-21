@@ -2,12 +2,12 @@ import { mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 
-const appUrl = process.env.BUG_BUNNY_DEMO_URL || 'http://127.0.0.1:5173';
+const appUrl = process.env.CONTROLX_DEMO_URL || 'http://127.0.0.1:5173';
 const targetUrl = 'https://portswigger.net/';
 const policyUrl = 'https://portswigger.net/blog/portswigger-bug-bounty-program';
-const replayRunId = process.env.BUG_BUNNY_EXTERNAL_RUN_ID || '';
+const replayRunId = process.env.CONTROLX_EXTERNAL_RUN_ID || '';
 const outputDir = resolve(process.cwd(), 'output', 'demo');
-const outputPath = resolve(outputDir, 'bug-bunny-external-program-demo.webm');
+const outputPath = resolve(outputDir, 'controlx-external-program-demo.webm');
 const pause = (milliseconds) => new Promise((resolvePause) => setTimeout(resolvePause, milliseconds));
 
 await mkdir(outputDir, { recursive: true });

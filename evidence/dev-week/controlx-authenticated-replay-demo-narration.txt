@@ -1,0 +1,11 @@
+ControlX is a local-first proof console for authorized web research. Its job is simple: find the delta, then prove the impact. This recording stays local, using two synthetic accounts, controlled objects, and a four-request ceiling.
+
+In Proof Lab, I paste each account's DevTools cURL capture. Tokens, object IDs, URLs, markers, and bodies stay ephemeral: never rendered or saved.
+
+Before traffic, ControlX compares the request shapes, confirms one changed object locator and two distinct sessions, then shows a redacted preview.
+
+The control matrix runs B-to-B, A-to-A, then B-to-A by changing only the session. If Account A's marker appears under Account B, ControlX stops immediately and records the exposure. If the controls hold, it closes only that tested branch.
+
+The write-once receipt retains hashes, outcome booleans, timing, network controls, and an integrity hash. An optional configured AI model can challenge the redacted evidence, but it never sees credentials, sends traffic, or controls the deterministic verdict.
+
+Built in Codex with GPT-5.6 Sol, ControlX turns a security hunch into bounded, reproducible proof. Find the delta. Prove the impact.

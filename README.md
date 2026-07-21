@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🐰 Bug Bunny
+# CTRL/X
 
-### Capture the request. Replay the claim. Preserve the proof.
+### Find the delta. Prove the impact.
 
-`AUTHENTICATED REPLAY` &nbsp; `LOCAL-FIRST` &nbsp; `VICTIM-CENTERED` &nbsp; `OPENAI BUILD WEEK 2026`
+`AUTHENTICATED REPLAY` &nbsp; `LOCAL-FIRST` &nbsp; `CONTROL-LED` &nbsp; `OPENAI BUILD WEEK 2026`
 
 <sub>Built with Codex GPT-5.6 Sol · Model-configurable AI review · React / FastAPI / SQLite · MIT</sub>
 
@@ -15,22 +15,29 @@
 > [!IMPORTANT]
 > **Observe broadly. Claim narrowly. Prove what matters.**
 >
-> Bug Bunny collects bounded evidence from local labs, owned systems, and
+> ControlX collects bounded evidence from local labs, owned systems, and
 > explicitly authorized in-scope Web targets. An optional configured AI model
 > can challenge unsupported claims, while deterministic proof remains in
 > control.
 
+> [!NOTE]
+> **ControlX is the current product name.** Historical Dev Week receipts, hashes,
+> filenames, and source-ledger entries intentionally retain their original names
+> so the evidence remains traceable and unaltered.
+
 ```text
-┌─[ BUG BUNNY // AUTHORIZED PROOF CONSOLE ]──────────────────────────┐
+┌─[ CTRL/X // AUTHORIZED PROOF CONSOLE ]──────────────────────────────┐
 │  SCOPE LOCKED   ·   SECRETS EPHEMERAL   ·   RECEIPTS VERIFIABLE   │
 └────────────────────────────────────────────────────────────────────┘
 ```
 
-![Bug Bunny authorized Safe Web Hunter](evidence/dev-week/safe-web-hunter.png)
+![ControlX authorized proof console](evidence/dev-week/controlx-authorized-proof-console.png)
+
+[▶ Watch the narrated ControlX demo on YouTube](https://youtu.be/VzguBCxDU9o)
 
 ## From observation to proof
 
-Bug Bunny has five real stages. The authenticated replay stage materially
+ControlX has five real stages. The authenticated replay stage materially
 extends the original localhost IDOR template into a reusable engine for a
 reviewed HackerOne, Bugcrowd, or Intigriti program—and for safe localhost
 fixtures.
@@ -70,7 +77,7 @@ authenticated replay engine is a separate, explicit, minimum-proof workflow.
 ## Live bounty targets: policy profiles
 
 Choose **Live bounty target** for public HackerOne, Bugcrowd, or Intigriti
-programs. Bug Bunny does not apply one generic scanner configuration to every
+programs. ControlX does not apply one generic scanner configuration to every
 program: the current policy profile determines the exact host, attribution,
 methods, rate, request budget, discovery boundary, and prohibited actions.
 
@@ -102,7 +109,7 @@ equivalent objects that you control. From each browser session, copy the
 account's own object request with DevTools **Copy as cURL**, then paste both
 captures and one benign, unique response marker per object into Proof Lab.
 
-Bug Bunny validates the complete plan before traffic. Both captures must:
+ControlX validates the complete plan before traffic. Both captures must:
 
 - use `GET` on the same exact origin;
 - describe the same endpoint shape and differ by exactly one object locator;
@@ -133,17 +140,17 @@ booleans, hashes, request count, and an integrity SHA-256.
 
 The earlier real controlled PWN run tested whether Account B could open Account
 A's known submission draft. A's owner control succeeded; B received Forbidden
-twice. Bug Bunny correctly closed only that tested branch as **`INVALID · NO
+twice. ControlX correctly closed only that tested branch as **`INVALID · NO
 IDOR`**, created zero findings, and kept the submission gate closed.
 
 ![Controlled external proof closed as no IDOR](evidence/dev-week/controlled-proof-closed.png)
 
 ### Custom program: one-response fallback
 
-For a program without a reviewed built-in profile, Bug Bunny keeps the smaller
+For a program without a reviewed built-in profile, ControlX keeps the smaller
 one-response mode.
 
-Before it will run, Bug Bunny records the platform, program name, current policy
+Before it will run, ControlX records the platform, program name, current policy
 URL, exact HTTPS in-scope URL, and two explicit operator acknowledgements. It
 then enforces this fixed boundary:
 
@@ -188,12 +195,12 @@ DevTools capture B ─┘                                  │
 > response marker to appear under B's isolated session. A `200` without the
 > marker cannot prove exposure.
 
-![Authenticated replay verified at the 3 of 4 stop condition](evidence/dev-week/authenticated-replay-verified.png)
+![ControlX authenticated replay verified at the 3 of 4 stop condition](evidence/dev-week/controlx-authenticated-replay-verified.png)
 
-[Watch the 79-second authenticated replay browser demo](evidence/dev-week/authenticated-replay-demo.webm)
+[Watch the 78-second ControlX authenticated replay browser demo](evidence/dev-week/controlx-authenticated-replay-demo.webm)
 or inspect the exact
 [sanitized receipt](evidence/dev-week/authenticated-replay-receipt.json) and
-[recorded AI challenge receipt](evidence/dev-week/authenticated-replay-kimi-receipt.json).
+[recorded historical AI challenge receipt](evidence/dev-week/authenticated-replay-kimi-receipt.json).
 
 The original deterministic IDOR template remains available as a smaller local
 regression proof in `proofs/idor_proof.py`. It seeds attacker and victim data on
@@ -205,15 +212,15 @@ pinning, bounded replay, and write-once receipts.
 ## Run it
 
 ```bash
-git clone https://github.com/sftwrstef/bug-bunny.git
-cd bug-bunny
+git clone https://github.com/sftwrstef/ctrl-x.git controlx
+cd controlx
 
 npm ci
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 
 # Optional AI-review stage:
-# install OpenCode, authenticate a provider, and set BUG_BUNNY_AI_MODEL
+# install OpenCode, authenticate a provider, and set CONTROLX_AI_MODEL
 # to a model that appears in `opencode models`.
 
 npm run dev
@@ -244,7 +251,7 @@ npm run dev
 npm run fixture:replay:vulnerable
 ```
 
-In Bug Bunny:
+In ControlX:
 
 1. Choose **Local / owned target → Authenticated replay**.
 2. Set the target to `http://127.0.0.1:8899/`, record that it is the bundled
@@ -308,7 +315,7 @@ OpenCode provider credential are available before optional analysis.
 
 For the reviewed live profile, select **Live bounty target → Intigriti PWN
 environment**, enter your real Intigriti username, read the current policy, and
-confirm every authorization gate. Bug Bunny will not enable the run button until
+confirm every authorization gate. ControlX will not enable the run button until
 the identity and policy acknowledgements are complete.
 
 The earlier strict manual controlled-proof import remains available for its
@@ -349,7 +356,7 @@ The reusable authenticated-replay screenshot, public-safe receipt, optional-AI
 test receipt, recording, narration, and subtitles are indexed in
 [`evidence/dev-week/README.md`](evidence/dev-week/README.md). The upload-ready
 79.23-second H.264/AAC export is generated locally at
-`output/demo/bug-bunny-final-demo.mp4`.
+`output/demo/controlx-authenticated-replay-demo.mp4`.
 
 ## Inside the repo
 
@@ -358,7 +365,7 @@ src/                    React hunt console + real pipeline views
 server/auditEngine.js   Bounded live Web recon and analysis engine
 backend/                Persistent API, model-configurable AI bridge, report + proof gates
 backend/replay_engine.py Structural cURL parser + pinned bounded replay engine
-.opencode/agents/       Tool-denied Bug Bunny evidence-review agent
+.opencode/agents/       Tool-denied ControlX evidence-review agent
 proofs/idor_proof.py    Original deterministic localhost IDOR template
 proofs/authenticated_replay_demo.py  Vulnerable/secure localhost A/B fixture
 tests/                  Web, replay, AI-boundary, and deterministic proof tests
@@ -376,7 +383,8 @@ model-configurable through OpenCode.** The configured model receives only saved,
 redacted evidence; it does not drive the replay, hold credentials, browse the
 target, or decide a deterministic verdict. Model, provider, session, token,
 cost, latency, and redacted-input hash are stored with each analysis. The
-included historical receipt used Kimi K3 only as a runtime smoke-test provider.
+included historical provider receipt is preserved only as a runtime smoke-test
+record; it does not configure ControlX.
 Primary Codex build task: `019f7376-015c-78b3-a2ea-7b43e4b03b40`. The required
 `/feedback` receipt remains a separate final submission field; it is not
 fabricated from this task identifier.
@@ -387,7 +395,7 @@ The copy-ready Devpost fields and final external checklist are in
 
 ## License
 
-Bug Bunny is released under the [MIT License](LICENSE).
+ControlX is released under the [MIT License](LICENSE).
 
 ---
 

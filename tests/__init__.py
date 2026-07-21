@@ -1,1 +1,1 @@
-"""Bug Bunny test suite."""
+"""ControlX test suite."""

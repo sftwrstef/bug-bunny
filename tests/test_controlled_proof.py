@@ -54,8 +54,8 @@ class ControlledProofTest(unittest.TestCase):
 
     def payload(self, **overrides: object) -> ControlledProofResultRequest:
         values: dict[str, object] = {
-            "owner_actor": "bugbunny",
-            "peer_actor": "bugbunny_b",
+            "owner_actor": "controlx",
+            "peer_actor": "controlx_b",
             "object_kind": "submission_draft",
             "target_host": "app.pwn.intigriti.rocks",
             "object_locator_sha256": "a" * 64,
@@ -83,14 +83,14 @@ class ControlledProofTest(unittest.TestCase):
         self.assertFalse(result["authorizationBranch"]["markerObserved"])
 
         serialized = json.dumps(artifact)
-        self.assertNotIn("BUGBUNNY-", serialized)
+        self.assertNotIn("CONTROLX-", serialized)
         self.assertNotIn("Forbidden —", serialized)
         self.assertNotIn("session_cookie_value", serialized.lower())
         self.assertNotIn("researcher@example.com", serialized.lower())
 
     def test_import_schema_rejects_extra_or_non_closing_claims(self) -> None:
         with self.assertRaises(ValidationError):
-            self.payload(object_marker="BUGBUNNY-SECRET")
+            self.payload(object_marker="CONTROLX-SECRET")
         with self.assertRaises(ValidationError):
             self.payload(peer_outcomes=["forbidden"])
         with self.assertRaises(ValidationError):
@@ -116,7 +116,7 @@ class ControlledProofTest(unittest.TestCase):
             with self.assertRaises(HTTPException):
                 build_controlled_proof_artifact(
                     self.make_run(root),
-                    self.payload(peer_actor="bugbunny"),
+                    self.payload(peer_actor="controlx"),
                 )
 
         with tempfile.TemporaryDirectory() as directory:

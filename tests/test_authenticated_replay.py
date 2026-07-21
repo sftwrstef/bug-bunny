@@ -36,7 +36,7 @@ EMAIL_SECRET = "capture-secret@example.test"
 
 
 class AuthenticatedReplayFixture(BaseHTTPRequestHandler):
-    server_version = "BugBunnyReplayFixture/1.0"
+    server_version = "ControlXReplayFixture/1.0"
 
     @property
     def fixture_server(self) -> Any:
@@ -482,7 +482,7 @@ class AuthenticatedReplayTest(unittest.TestCase):
                         owner_curl=owner_curl,
                         peer_curl=peer_curl,
                     ),
-                    x_bug_bunny_intent=app_backend.AUTHENTICATED_REPLAY_INTENT,
+                    x_controlx_intent=app_backend.AUTHENTICATED_REPLAY_INTENT,
                 )["preview"]
                 response = app_backend.run_authenticated_replay(
                     run_id,
@@ -497,7 +497,7 @@ class AuthenticatedReplayTest(unittest.TestCase):
                         controlled_objects_acknowledged=True,
                         third_party_data_expected=False,
                     ),
-                    x_bug_bunny_intent=app_backend.AUTHENTICATED_REPLAY_INTENT,
+                    x_controlx_intent=app_backend.AUTHENTICATED_REPLAY_INTENT,
                 )
 
                 self.assertEqual(response["authenticated_replay_result"]["verdict"], "VERIFIED")

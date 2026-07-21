@@ -13,7 +13,7 @@ from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
 
-ATTACKER_TOKEN = "bug-bunny-attacker-token"
+ATTACKER_TOKEN = "controlx-attacker-token"
 USERS = {
     "attacker": {
         "id": "attacker",
@@ -39,7 +39,7 @@ def _sha256(value: Any) -> str:
 
 
 class VulnerableProfileHandler(BaseHTTPRequestHandler):
-    server_version = "BugBunnyFixture/1.0"
+    server_version = "ControlXFixture/1.0"
 
     def do_GET(self) -> None:  # noqa: N802 - stdlib handler method name
         parsed = urlparse(self.path)
@@ -177,7 +177,7 @@ def write_proof(path: Path) -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Run Bug Bunny's deterministic victim-centered IDOR proof."
+        description="Run ControlX's deterministic victim-centered IDOR proof."
     )
     parser.add_argument(
         "--output",

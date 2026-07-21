@@ -2,15 +2,15 @@ import { mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { chromium } from 'playwright';
 
-const appUrl = process.env.BUG_BUNNY_DEMO_URL || 'http://127.0.0.1:5173';
-const runId = process.env.BUG_BUNNY_CONTROLLED_RUN_ID;
+const appUrl = process.env.CONTROLX_DEMO_URL || 'http://127.0.0.1:5173';
+const runId = process.env.CONTROLX_CONTROLLED_RUN_ID;
 const outputPath = resolve(
   process.cwd(),
-  process.env.BUG_BUNNY_PROOF_SCREENSHOT || 'evidence/dev-week/controlled-proof-closed.png'
+  process.env.CONTROLX_PROOF_SCREENSHOT || 'evidence/dev-week/controlx-controlled-proof-closed.png'
 );
 
 if (!runId) {
-  throw new Error('Set BUG_BUNNY_CONTROLLED_RUN_ID to the saved controlled-proof run.');
+  throw new Error('Set CONTROLX_CONTROLLED_RUN_ID to the saved controlled-proof run.');
 }
 
 await mkdir(dirname(outputPath), { recursive: true });

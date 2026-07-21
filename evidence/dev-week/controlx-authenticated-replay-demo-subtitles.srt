@@ -1,0 +1,34 @@
+1
+00:00:00,000 --> 00:00:11,000
+ControlX is a local-first proof console for authorized Web research.
+Find the delta. Prove the impact.
+
+2
+00:00:11,000 --> 00:00:22,000
+This local demo uses two synthetic accounts, controlled objects,
+and a four-request ceiling.
+
+3
+00:00:22,000 --> 00:00:34,000
+Each account contributes its own DevTools cURL capture.
+Tokens, object IDs, URLs, markers, and bodies stay ephemeral.
+
+4
+00:00:34,000 --> 00:00:46,000
+ControlX confirms one changed object locator, two distinct sessions,
+and a redacted request preview before any traffic is sent.
+
+5
+00:00:46,000 --> 00:00:59,000
+The matrix runs B→B, A→A, then B→A by changing only the session.
+Exposure stops immediately; stable denials close only the tested branch.
+
+6
+00:00:59,000 --> 00:01:12,000
+The receipt preserves hashes, outcomes, timing, network controls,
+and integrity metadata. Optional AI review cannot control the verdict.
+
+7
+00:01:12,000 --> 00:01:23,000
+Built in Codex with GPT-5.6 Sol.
+ControlX: Find the delta. Prove the impact.

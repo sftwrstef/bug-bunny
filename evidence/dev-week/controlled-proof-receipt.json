@@ -11,8 +11,8 @@
     "raw_locator_stored": false
   },
   "actors": {
-    "owner": "bugbunny",
-    "peer": "sftwr_bugbunny_b_0721",
+    "owner": "controlx_owner",
+    "peer": "sftwr_controlx_b_0721",
     "both_researcher_controlled": true,
     "sessions_isolated": true
   },

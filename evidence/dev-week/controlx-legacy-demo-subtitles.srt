@@ -1,6 +1,6 @@
 1
 00:00:00,100 --> 00:00:03,702
-Bug Bunny is an evidence console for authorized Web research.
+ControlX is an evidence console for authorized Web research.
 
 2
 00:00:03,652 --> 00:00:06,879
@@ -26,4 +26,4 @@ The final report packages commands, evidence, and status.
 
 7
 00:00:30,152 --> 00:00:36,788
-Built in Codex with GPT-5.6 Sol, Bug Bunny converts real signals into verifiable reports.
+Built in Codex with GPT-5.6 Sol, ControlX converts real signals into verifiable reports.

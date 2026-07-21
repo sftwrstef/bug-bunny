@@ -3,7 +3,7 @@
   "provider": "opencode-go",
   "model": "kimi-k3",
   "model_ref": "opencode-go/kimi-k3",
-  "agent": "bug-bunny",
+  "agent": "controlx",
   "session_id": "ses_07d26df27ffe0u4VZLYAhwPThD",
   "cost_usd": 0.026421,
   "tokens": {

@@ -1,8 +1,8 @@
 # Dev Week work ledger
 
 > **Historical naming note:** the current product is branded **ControlX**. This
-> ledger retains dated provider, receipt, account, and filename identifiers only
-> where they are needed to preserve the evidence trail.
+> ledger retains dated provider and receipt metadata only where it is needed to
+> preserve the evidence trail.
 
 Submission period: July 13, 2026 at 9:00 AM PT through July 21, 2026 at
 5:00 PM PT.
@@ -294,9 +294,10 @@ now come from a policy-gated capture rather than a hard-coded endpoint.
 - Kimi runtime receipt: `evidence/dev-week/kimi-runtime-receipt.json`.
 - Live Kimi report:
   `runs/a43dcf88-9b95-463f-bede-071159f04767/reports/observation-ledger.md`.
-- Narrated demo source: `evidence/dev-week/bug-bunny-demo-narration.txt` and
-  `evidence/dev-week/bug-bunny-demo-subtitles.srt`; the generated H.264/AAC
-  upload file is `output/demo/bug-bunny-demo.mp4` (36.5 seconds, local-only).
+- Narrated demo source: `evidence/dev-week/controlx-legacy-demo-narration.txt`
+  and `evidence/dev-week/controlx-legacy-demo-subtitles.srt`; the generated
+  H.264/AAC upload file is `output/demo/controlx-legacy-demo.mp4` (36.5
+  seconds, local-only).
 - Reusable authenticated-replay browser capture:
   `evidence/dev-week/authenticated-replay-verified.png`.
 - Public-safe authenticated-replay receipt:

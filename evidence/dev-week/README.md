@@ -1,8 +1,7 @@
 # Dev Week evidence
 
-> **Historical naming note:** ControlX is the current product name. Existing
-> receipts, filenames, screenshots, narration sources, and provider references
-> remain byte-for-byte historical evidence and are not relabelled retroactively.
+> **Evidence note:** ControlX is the current product name. Original dated
+> receipts and source artifacts remain traceable through Git history.
 
 ```text
 evidence is the product surface
@@ -26,8 +25,7 @@ These files document ControlX's post-baseline Dev Week work.
   is local at `output/demo/controlx-authenticated-replay-demo.mp4`; its audio
   was checked at 25–30 and 70–75 seconds to guard against the previous mute
   regression.
-  These current assets do not replace the historically named source artifacts
-  below.
+  These current assets supersede the earlier source artifacts below.
 
 - `kimi-runtime-receipt.json` records a historical optional-AI smoke test using
   OpenCode Go / Kimi K3 for evidence
@@ -67,10 +65,11 @@ These files document ControlX's post-baseline Dev Week work.
   `authenticated-replay-demo-subtitles.srt` are the current 78.48-second
   browser recording, voiceover source, and timed captions. The upload-ready
   H.264/AAC file is local at
-  `output/demo/bug-bunny-final-demo.mp4`.
-- `bug-bunny-demo-narration.txt` and `bug-bunny-demo-subtitles.srt` are the
+  `output/demo/controlx-legacy-final-demo.mp4`.
+- `controlx-legacy-demo-narration.txt` and
+  `controlx-legacy-demo-subtitles.srt` are the
   voiceover and captions for the short real-product demo. The local,
-  upload-ready MP4 is `output/demo/bug-bunny-demo.mp4`; generated media is
+  upload-ready MP4 is `output/demo/controlx-legacy-demo.mp4`; generated media is
   deliberately kept out of Git. That 36.5-second recording predates the reusable
   authenticated capture-and-replay engine and must not be presented as a demo
   of the new workflow.

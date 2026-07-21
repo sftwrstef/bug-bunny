@@ -1,6 +1,6 @@
 1
 00:00:00,000 --> 00:00:15,000
-Bug Bunny is a local-first proof console for authorized Web research.
+ControlX is a local-first proof console for authorized Web research.
 It works with local labs, owned systems, and explicitly authorized in-scope
 targets, including HackerOne, Bugcrowd, and Intigriti programs.
 
@@ -16,7 +16,7 @@ and two distinct sessions before any traffic is sent.
 
 4
 00:00:36,000 --> 00:00:52,000
-Bug Bunny proves B→B and A→A, then derives B→A by changing only the session.
+ControlX proves B→B and A→A, then derives B→A by changing only the session.
 A's marker appears under B, so execution stops at 3 of 4 requests.
 
 5

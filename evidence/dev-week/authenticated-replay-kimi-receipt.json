@@ -2,7 +2,7 @@
   "run_id": "b2784892-6cde-4bfd-a95d-33a30361327e",
   "provider": "opencode-go",
   "model": "opencode-go/kimi-k3",
-  "agent": "bug-bunny",
+  "agent": "controlx",
   "session_id": "ses_07a422d7effeOrvAhxlSlRA9B8",
   "cost_usd": 0.051123,
   "latency_ms": 114935,

@@ -1,4 +1,4 @@
-Bug Bunny is an evidence console for authorized Web research.
+ControlX is an evidence console for authorized Web research.
 
 The scope gate records the target and explicit approval. One click runs a bounded, read-only Web audit to capture headers, routes, cookies, CORS behavior, and reproduction commands.
 
@@ -6,4 +6,4 @@ Surface Map shows the safely reached routes and candidate signals.
 
 When a claim needs proof, the same-state IDOR replay proves legitimate access, then demonstrates victim-private data exposure.
 
-The final report packages commands, evidence, and status. Built in Codex with GPT-5.6 Sol, Bug Bunny converts real signals into verifiable reports.
+The final report packages commands, evidence, and status. Built in Codex with GPT-5.6 Sol, ControlX converts real signals into verifiable reports.

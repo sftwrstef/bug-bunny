@@ -401,6 +401,6 @@ ControlX is released under the [MIT License](LICENSE).
 
 <div align="center">
 
-`make the harm legible.`
+`Evidence first. Claims second.`
 
 </div>
